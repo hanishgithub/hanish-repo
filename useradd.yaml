@@ -1,0 +1,16 @@
+---
+- name: Intro to Ansible Playbooks
+  hosts: all
+
+  tasks:
+  - name: Copy file hosts with permissions
+    ansible.builtin.copy:
+      src: ./newdbsetup.yaml
+      dest: /tmp/hosts_backup
+      mode: '0644'
+  - name: Add the user 'bobuser'
+    ansible.builtin.user:
+      name: bob
+    become: yes
+    become_method: sudo
+  
